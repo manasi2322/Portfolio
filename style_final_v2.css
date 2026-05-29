@@ -103,6 +103,151 @@ button, input, textarea, select { font: inherit; }
   overflow: hidden;
 }
 
+/* big name - in front of character */
+.hero-name {
+  position: absolute;
+  top: 38%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(100px, 17vw, 200px);
+  font-weight: 700;
+  letter-spacing: clamp(2px, 0.5vw, 8px);
+  color: #ffffff;
+  z-index: 5;
+  user-select: none;
+  white-space: nowrap;
+  animation: fade-in .9s ease both;
+}
+@keyframes fade-in { from{opacity:0;transform:translate(-50%,-50%) scale(.96);} to{opacity:1;transform:translate(-50%,-50%) scale(1);} }
+
+/* orange glow circle */
+.orange-circle {
+  position: absolute;
+  top: 22%; left: 50%;
+  transform: translateX(-50%);
+  width: clamp(160px, 20vw, 240px);
+  height: clamp(160px, 20vw, 240px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff7b50, #e95d38);
+  box-shadow: 0 0 120px rgba(240,100,60,.5);
+  z-index: 2;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%,100% { opacity:.85; transform:translateX(-50%) scale(1); }
+  50%      { opacity:1;   transform:translateX(-50%) scale(1.1); }
+}
+
+/* character PNG */
+.character-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -48%);
+  width: clamp(260px, 32vw, 400px);
+  z-index: 3;
+  animation: floatChar 4s ease-in-out infinite;
+}
+.character-img {
+  width: 100%; height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.45))
+          drop-shadow(0 0 40px rgba(232,87,42,0.12));
+}
+@keyframes floatChar {
+  0%,100% { transform:translate(-50%,-48%) translateY(0); }
+  50%      { transform:translate(-50%,-48%) translateY(-14px); }
+}
+
+/* decorative orange lines */
+.deco-line {
+  position: absolute; height: 2px;
+  background: var(--orange); z-index: 4; opacity: .8;
+  animation: lineAnim 3s ease-in-out infinite;
+}
+.l1 { width:70px;  top:34%; left:calc(50% + 90px);  animation-delay:0s; }
+.l2 { width:95px;  top:43%; left:calc(50% + 110px); animation-delay:.4s; }
+.l3 { width:65px;  top:50%; left:calc(50% - 165px); animation-delay:.8s; }
+.l4 { width:45px;  top:63%; left:calc(50% + 70px);  animation-delay:.2s; }
+.l5 { width:55px;  top:79%; left:calc(50% - 130px); animation-delay:.6s; }
+@keyframes lineAnim {
+  0%,100% { transform:translateX(0);    opacity:.7; }
+  50%      { transform:translateX(10px); opacity:1; }
+}
+
+/* left panel */
+.hero-left-panel {
+  position: absolute;
+  left: clamp(24px, 16%, 260px);
+  top: 63%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+.hero-tw-text {
+  font-family: 'Orbitron', var(--mono);
+  font-size: clamp(12px, 1.3vw, 17px);
+  letter-spacing: 3px; color: var(--orange);
+  margin-bottom: 28px; min-height: 28px;
+}
+.tw-cursor { animation: blink 1s step-end infinite; color: var(--orange); }
+@keyframes blink { 50%{opacity:0;} }
+
+/* download CV button */
+.download-btn {
+  display: inline-block;
+  border: 1px solid var(--orange); color: var(--orange);
+  padding: 14px 36px;
+  font-family: 'Orbitron', var(--mono);
+  letter-spacing: 3px; font-size: 12px;
+  text-decoration: none; background: transparent;
+  transition: background .3s, color .3s, transform .3s, box-shadow .3s;
+}
+.download-btn:hover {
+  background: var(--orange); color: #1d1d22;
+  transform: translateY(-4px);
+  box-shadow: 0 0 28px rgba(240,100,60,.45);
+}
+
+/* social sidebar */
+.social-sidebar {
+  position: fixed; right: 36px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 26px;
+  z-index: 200;
+}
+.social-sidebar a {
+  color: rgba(255,255,255,.7); font-size: 20px;
+  transition: color .25s, transform .25s;
+}
+.social-sidebar a:hover { color: var(--orange); transform: translateX(-5px) scale(1.15); }
+
+/* chatbot button */
+.chatbot-btn {
+  position: fixed; right: 28px; bottom: 28px;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #2d8f5a; color: #fff; font-size: 26px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 20px rgba(45,143,90,.7); z-index: 200; cursor: pointer;
+  transition: transform .25s, box-shadow .25s;
+}
+.chatbot-btn:hover { transform: scale(1.1); box-shadow: 0 0 32px rgba(45,143,90,.9); }
+
+/* ── SHARED SECTION ── */
+.section { max-width: var(--max); margin: 0 auto; padding: 96px var(--pad); border-bottom: 1px solid var(--line); }
+.section-alt { background: var(--bg-alt); max-width: 100%; }
+.section-alt > * { max-width: var(--max); margin-left: auto; margin-right: auto; }
+
+/* section title - Lobster */
+.sec-title {
+  display: block;
+  font-family: 'Lobster', cursive;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--orange);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
 /* ── FOOTER ── */
 .footer { padding: 24px var(--pad); border-top: 1px solid var(--line); text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--gray); }
 
@@ -111,9 +256,25 @@ button, input, textarea, select { font: inherit; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .navbar-inner { gap: 20px; }
+  .navbar-inner a { font-size: 10px; letter-spacing: 1.5px; }
+  .social-sidebar { right: 16px; gap: 20px; }
+}
 @media (max-width: 768px) {
   .navbar-inner { display: none; }
   .burger { display: flex; }
+  .hero-name { font-size: clamp(52px, 16vw, 90px); letter-spacing: clamp(4px, 2vw, 12px); }
+  .character-wrap { width: clamp(200px, 58vw, 300px); transform: translate(-50%, -46%); }
+  @keyframes floatChar { 0%,100%{transform:translate(-50%,-46%) translateY(0);} 50%{transform:translate(-50%,-46%) translateY(-10px);} }
+  .hero-left-panel { left: 16px; top: auto; bottom: 80px; transform: none; }
+  .hero-tw-text { font-size: 11px; letter-spacing: 2px; }
+  .download-btn { padding: 11px 24px; font-size: 10px; letter-spacing: 2px; }
+  .social-sidebar { display: none; }
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
+}
+@media (max-width: 480px) {
+  .hero-name { font-size: clamp(40px, 18vw, 68px); }
+  .deco-line { display: none; }
 }
