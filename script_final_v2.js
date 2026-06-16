@@ -86,34 +86,26 @@ if (form) {
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    const payload = {
-      service_id:      'service_hbhym2pv',
-      template_id:     'template_8vwp089',
-      user_id:         'SdOmFmtw1mb4Uzenn',
-      template_params: {
-        name:    form.elements['name'].value,
-        email:   form.elements['email'].value,
-        subject: form.elements['subject'].value,
-        message: form.elements['message'].value,
-        time:    new Date().toLocaleString()
-      }
+    emailjs.init({ publicKey: 'SdOmFmtw1mb4Uzenn' });
+
+    const templateParams = {
+      name:    form.elements['name'].value,
+      email:   form.elements['email'].value,
+      subject: form.elements['subject'].value,
+      message: form.elements['message'].value,
+      time:    new Date().toLocaleString()
     };
 
-    fetch('https://api.emailjs.com/api/v1.0/email/send', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
-    })
-      .then(res => {
-        if (!res.ok) return res.text().then(t => { throw new Error(t); });
+    emailjs.send('service_hbhym2pv', 'template_8vwp089', templateParams)
+      .then(() => {
         note.style.color = '#f97316';
         note.textContent = "✓ Message sent! I'll be in touch soon.";
         form.reset();
       })
       .catch(err => {
-        console.error('EmailJS error:', err.message);
+        console.error('EmailJS error:', err);
         note.style.color = '#ef4444';
-        note.textContent = '✗ ' + err.message;
+        note.textContent = '✗ ' + (err.text || err.message || 'Something went wrong.');
       })
       .finally(() => {
         btn.textContent = 'S e n d  M e s s a g e  ✈';
