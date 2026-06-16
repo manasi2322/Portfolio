@@ -103,9 +103,11 @@ if (form) {
         form.reset();
       })
       .catch((err) => {
-        console.error('EmailJS error:', err);
+        console.error('EmailJS error status:', err.status);
+        console.error('EmailJS error text:', err.text);
+        console.error('EmailJS full error:', JSON.stringify(err));
         note.style.color = '#ef4444';
-        note.textContent = '✗ Error: ' + (err.text || err.message || JSON.stringify(err));
+        note.textContent = '✗ ' + (err.text || err.message || JSON.stringify(err));
       })
       .finally(() => {
         btn.textContent = 'S e n d  M e s s a g e  ✈';
