@@ -102,9 +102,10 @@ if (form) {
         note.textContent = "✓ Message sent! I'll be in touch soon.";
         form.reset();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('EmailJS error:', err);
         note.style.color = '#ef4444';
-        note.textContent = '✗ Something went wrong. Please try again.';
+        note.textContent = '✗ Error: ' + (err.text || err.message || JSON.stringify(err));
       })
       .finally(() => {
         btn.textContent = 'S e n d  M e s s a g e  ✈';
