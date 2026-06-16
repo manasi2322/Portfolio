@@ -77,7 +77,7 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── CONTACT FORM ──
-emailjs.init('EOGufUK1KV4I7G1Zi');
+emailjs.init({ publicKey: 'EOGufUK1KV4I7G1Zi' });
 
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
