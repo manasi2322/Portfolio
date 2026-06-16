@@ -77,6 +77,8 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── CONTACT FORM ──
+emailjs.init({ publicKey: 'SdOmFmtw1mb4Uzenn' });
+
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
 if (form) {
@@ -85,8 +87,6 @@ if (form) {
     const btn = form.querySelector('.send-btn');
     btn.textContent = 'Sending…';
     btn.disabled = true;
-
-    emailjs.init({ publicKey: 'SdOmFmtw1mb4Uzenn' });
 
     const templateParams = {
       name:    form.elements['name'].value,
