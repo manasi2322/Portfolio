@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style_final_v2.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Caveat:wght@700&family=Inter:wght@400;500;600&family=Orbitron:wght@400;500;700;900&family=Dancing+Script:wght@700&family=Lobster&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -448,19 +449,19 @@
         <form id="contactForm" class="contact-form">
           <div class="cf-group">
             <label>Name</label>
-            <input type="text" placeholder="Your name" required />
+            <input type="text" name="name" placeholder="Your name" required />
           </div>
           <div class="cf-group">
             <label>Email</label>
-            <input type="email" placeholder="your@email.com" required />
+            <input type="email" name="email" placeholder="your@email.com" required />
           </div>
           <div class="cf-group">
             <label>Subject</label>
-            <input type="text" placeholder="What's this about?" required />
+            <input type="text" name="subject" placeholder="What's this about?" required />
           </div>
           <div class="cf-group">
             <label>Message</label>
-            <textarea rows="5" placeholder="Tell me more..."></textarea>
+            <textarea rows="5" name="message" placeholder="Tell me more..."></textarea>
           </div>
           <button type="submit" class="send-btn mono">S e n d &nbsp; M e s s a g e &nbsp; ✈</button>
           <p id="formNote"></p>

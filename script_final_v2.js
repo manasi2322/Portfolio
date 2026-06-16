@@ -77,13 +77,39 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── CONTACT FORM ──
+emailjs.init('EOGufUK1KV4I7G1Zi');
+
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
 if (form) {
   form.addEventListener('submit', e => {
     e.preventDefault();
-    note.textContent = "✓ Message sent! I'll be in touch soon.";
-    form.reset();
-    setTimeout(() => { note.textContent = ''; }, 4000);
+    const btn = form.querySelector('.send-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const templateParams = {
+      name:    form.name.value,
+      email:   form.email.value,
+      subject: form.subject.value,
+      message: form.message.value,
+      time:    new Date().toLocaleString()
+    };
+
+    emailjs.send('service_a4ttl1c', 'template_nmozd9d', templateParams)
+      .then(() => {
+        note.style.color = '#f97316';
+        note.textContent = "✓ Message sent! I'll be in touch soon.";
+        form.reset();
+      })
+      .catch(() => {
+        note.style.color = '#ef4444';
+        note.textContent = '✗ Something went wrong. Please try again.';
+      })
+      .finally(() => {
+        btn.textContent = 'S e n d  M e s s a g e  ✈';
+        btn.disabled = false;
+        setTimeout(() => { note.textContent = ''; }, 5000);
+      });
   });
 }
