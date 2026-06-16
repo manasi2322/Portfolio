@@ -89,10 +89,10 @@ if (form) {
     btn.disabled = true;
 
     const templateParams = {
-      name:    form.name.value,
-      email:   form.email.value,
-      subject: form.subject.value,
-      message: form.message.value,
+      name:    form.elements['name'].value,
+      email:   form.elements['email'].value,
+      subject: form.elements['subject'].value,
+      message: form.elements['message'].value,
       time:    new Date().toLocaleString()
     };
 
