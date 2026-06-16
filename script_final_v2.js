@@ -96,7 +96,7 @@ if (form) {
       time:    new Date().toLocaleString()
     };
 
-    emailjs.send('service_hbhym2pv', 'template_8vwp089', templateParams)
+    emailjs.send('service_hbhym2p', 'template_8vwp089', templateParams)
       .then(() => {
         note.style.color = '#f97316';
         note.textContent = "✓ Message sent! I'll be in touch soon.";
