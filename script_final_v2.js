@@ -77,8 +77,6 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── CONTACT FORM ──
-emailjs.init({ publicKey: 'EOGufUK1KV4I7G1Zi' });
-
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
 if (form) {
@@ -88,26 +86,34 @@ if (form) {
     btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    const templateParams = {
-      name:    form.elements['name'].value,
-      email:   form.elements['email'].value,
-      subject: form.elements['subject'].value,
-      message: form.elements['message'].value,
-      time:    new Date().toLocaleString()
+    const payload = {
+      service_id:      'service_a4ttl1c',
+      template_id:     'template_nmozd9d',
+      user_id:         'EOGufUK1KV4I7G1Zi',
+      template_params: {
+        name:    form.elements['name'].value,
+        email:   form.elements['email'].value,
+        subject: form.elements['subject'].value,
+        message: form.elements['message'].value,
+        time:    new Date().toLocaleString()
+      }
     };
 
-    emailjs.send('service_a4ttl1c', 'template_nmozd9d', templateParams)
-      .then(() => {
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    })
+      .then(res => {
+        if (!res.ok) return res.text().then(t => { throw new Error(t); });
         note.style.color = '#f97316';
         note.textContent = "✓ Message sent! I'll be in touch soon.";
         form.reset();
       })
-      .catch((err) => {
-        console.error('EmailJS error status:', err.status);
-        console.error('EmailJS error text:', err.text);
-        console.error('EmailJS full error:', JSON.stringify(err));
+      .catch(err => {
+        console.error('EmailJS error:', err.message);
         note.style.color = '#ef4444';
-        note.textContent = '✗ ' + (err.text || err.message || JSON.stringify(err));
+        note.textContent = '✗ ' + err.message;
       })
       .finally(() => {
         btn.textContent = 'S e n d  M e s s a g e  ✈';
