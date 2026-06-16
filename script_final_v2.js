@@ -77,7 +77,7 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // ── CONTACT FORM ──
-emailjs.init({ publicKey: 'SdOmFmtw1mb4Uzenn' });
+emailjs.init({ publicKey: 'lCUN3Hr3fa9rxiYjh' });
 
 const form = document.getElementById('contactForm');
 const note = document.getElementById('formNote');
@@ -96,7 +96,7 @@ if (form) {
       time:    new Date().toLocaleString()
     };
 
-    emailjs.send('service_hbhym2p', 'template_8vwp089', templateParams)
+    emailjs.send('service_b0a5qib', 'template_nmozd9d', templateParams)
       .then(() => {
         note.style.color = '#f97316';
         note.textContent = "✓ Message sent! I'll be in touch soon.";
